@@ -24,7 +24,9 @@ app.get('/:date', (request, response) => {
   var date = request.params.date;
   var output = {"unix": null, "natural": null};  
   if(hasSpace(date)) {
-    output = {"unix": timestamp.fromDate(date), "natural": date};  
+    if(timestamp.fromDate(date)) {
+      output = {"unix": timestamp.fromDate(date), "natural": date};    
+    }
   } else {
     date = parseInt(date);
     var natural = timestamp.toDate(date);
